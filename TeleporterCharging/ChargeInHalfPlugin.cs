@@ -10,11 +10,9 @@ namespace TeleporterCharging
         {
             On.RoR2.HoldoutZoneController.OnEnable += (orig, self) =>
             {
-                if(RoR2.run.instance.stageClearCount % RoR2.Run.stagesPerLoop == 0
-                    && RoR2.run.instance.stageClearCount > 0) {
-                    self.baseChargeDuration /= 2;
-                    orig(self);   
-                }
+                int div = (int)Math.Pow(2, (int)(RoR2.Run.instance.stageClearCount / RoR2.Run.stagesPerLoop));
+                self.baseChargeDuration /= div;
+                orig(self);
             };
         }
     }
